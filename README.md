@@ -16,7 +16,7 @@ getting the flag of a particular country for any reason.
     flags by invoking just two methods.
 ---
 ## System requirement
-- Android minSDKversion = 15
+- Android minSDKversion = 21 // To enable vector image support
 - Android targetSDKversion = 29
 
 ---
@@ -115,6 +115,11 @@ final Country afghanistan = World.getCountryFrom("af|afg|afghanistan|4");
 ```java
 final List<Country> countries = World.getAllCountries();
 // This list cannot be modified but you can get its contents
+```
+
+__New from v1.5.1-beta__
+```java 
+final String currentVersion = World.version(); // returns a string representation of the current library
 ```
 Link to javadoc --> [javadoc link](https://blongho.github.io/worldCountryData/doc/)
 
