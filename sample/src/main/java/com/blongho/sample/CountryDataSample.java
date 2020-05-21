@@ -107,7 +107,6 @@ public class CountryDataSample extends AppCompatActivity {
       @Override
       public void afterTextChanged(final Editable s) {
         flag.setImageResource(World.getFlagOf(entered));
-        country = World.getCountryFrom(entered);
 
         // Interested in the currency, get it by
         // final Currency currency = country.getCurrency();
