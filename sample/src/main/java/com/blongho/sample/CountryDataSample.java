@@ -32,35 +32,33 @@ import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.blongho.country_data.Country;
-import com.blongho.country_data.Currency;
 import com.blongho.country_data.World;
 import com.google.android.material.textfield.TextInputEditText;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 public class CountryDataSample extends AppCompatActivity {
 
-  private ImageView flag = null; // the flag view
-  private TextInputEditText identifier = null; // edit text
-  private TextView countryName = null; // the country name
-  private TextView alpha2; // the country iso alpha2
-  private TextView alpha3; // the country iso alpha3
-  private TextView code; // the country numeric code
-  private TextView currency; // the currency of the country
-  private TextView capital, area, population, continent;
-  private String entered; // the value entered by the user
-  private Country country;
+    private ImageView flag = null; // the flag view
+    private TextInputEditText identifier = null; // edit text
+    private TextView countryName = null; // the country name
+    private TextView alpha2; // the country iso alpha2
+    private TextView alpha3; // the country iso alpha3
+    private TextView code; // the country numeric code
+    private TextView currency; // the currency of the country
+    private TextView capital, area, population, continent;
+    private String entered; // the value entered by the user
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_country_data_sample);
-    // 1.  Initialize the library
-    World.init(getApplicationContext());
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_country_data_sample);
+        // 1.  Initialize the library
+        World.init(getApplicationContext());
 
-    flag = (ImageView) findViewById(R.id.flag);
+        flag = (ImageView) findViewById(R.id.flag);
 
 		/*
 		2.
@@ -69,86 +67,65 @@ public class CountryDataSample extends AppCompatActivity {
 		flag.setImageResource(World.getFlagOf(724));
 		Rur-run the app. What do you notice?
 		*/
-    flag.setImageResource(
-        World.getWorldFlag()); // This overrides the value set in activity_main.xml line 18
+        flag.setImageResource(
+                World.getWorldFlag()); // This overrides the value set in activity_main.xml line 18
 
-    countryName = (TextView) findViewById(R.id.countryName);
-    identifier = (TextInputEditText) findViewById(R.id.identifier);
+        countryName = (TextView) findViewById(R.id.countryName);
+        identifier = (TextInputEditText) findViewById(R.id.identifier);
 
-    // Do you want to get the country and flag dynamically, it as simple as below
+        // Do you want to get the country and flag dynamically, it as simple as below
 
-    alpha2 = (TextView) findViewById(R.id.alpha2);
-    alpha3 = (TextView) findViewById(R.id.alpha3);
-    code = (TextView) findViewById(R.id.numericCode);
-    currency = (TextView) findViewById(R.id.currency);
-    area = (TextView) findViewById(R.id.area);
-    population = (TextView) findViewById(R.id.population);
-    capital = (TextView) findViewById(R.id.capital);
-    continent = (TextView) findViewById(R.id.continent);
-    identifier.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(
-          final CharSequence s, final int start, final int count, final int after) {
+        alpha2 = (TextView) findViewById(R.id.alpha2);
+        alpha3 = (TextView) findViewById(R.id.alpha3);
+        code = (TextView) findViewById(R.id.numericCode);
+        currency = (TextView) findViewById(R.id.currency);
+        area = (TextView) findViewById(R.id.area);
+        population = (TextView) findViewById(R.id.population);
+        capital = (TextView) findViewById(R.id.capital);
+        continent = (TextView) findViewById(R.id.continent);
+        identifier.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(
+                    final CharSequence s, final int start, final int count, final int after) {
 
-      }
+            }
 
-      @Override
-      public void onTextChanged(
-          final CharSequence s, final int start, final int before, final int count) {
-        entered = String.valueOf(s).trim();
-        if (isEmulator()) {
-          InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(
-              Context.INPUT_METHOD_SERVICE);
-          inputMethodManager.hideSoftInputFromWindow(identifier.getWindowToken(), 0);
+            @Override
+            public void onTextChanged(
+                    final CharSequence s, final int start, final int before, final int count) {
+                entered = String.valueOf(s).trim();
+                if (isEmulator()) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(identifier.getWindowToken(), 0);
 
-        }
-      }
+                }
+            }
 
-      @Override
-      public void afterTextChanged(final Editable s) {
-        flag.setImageResource(World.getFlagOf(entered));
+            @Override
+            public void afterTextChanged(final Editable s) {
+                flag.setImageResource(World.getFlagOf(entered));
+            }
+        });
+    }
 
-        // Interested in the currency, get it by
-        // final Currency currency = country.getCurrency();
-
-        // See what a country object is
-        if (country.getFlagResource() != World.getWorldFlag()) {
-          countryName.setText(country.getName());
-          alpha2.setText(country.getAlpha2());
-          alpha3.setText(country.getAlpha3());
-          code.setText(String.valueOf(country.getId()));
-          area.setText(
-              NumberFormat.getInstance(Locale.getDefault()).format(country.getArea()) + " sq. km");
-          capital.setText(country.getCapital());
-          population.setText(
-              NumberFormat.getInstance(Locale.getDefault()).format(country.getPopulation()));
-          continent.setText(country.getContinent().toUpperCase());
-          final Currency curr = country.getCurrency();
-          if (curr != null) {
-            currency.setText("Currency: " + curr.toString());
-          }
-        }
-      }
-    });
-  }
-
-  private boolean isEmulator() {
-    return (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
-        || Build.FINGERPRINT.startsWith("generic")
-        || Build.FINGERPRINT.startsWith("unknown")
-        || Build.HARDWARE.contains("goldfish")
-        || Build.HARDWARE.contains("ranchu")
-        || Build.MODEL.contains("google_sdk")
-        || Build.MODEL.contains("Emulator")
-        || Build.MODEL.contains("Android SDK built for x86")
-        || Build.MANUFACTURER.contains("Genymotion")
-        || Build.PRODUCT.contains("sdk_google")
-        || Build.PRODUCT.contains("google_sdk")
-        || Build.PRODUCT.contains("sdk")
-        || Build.PRODUCT.contains("sdk_x86")
-        || Build.PRODUCT.contains("vbox86p")
-        || Build.PRODUCT.contains("emulator")
-        || Build.PRODUCT.contains("simulator");
-  }
+    private boolean isEmulator() {
+        return (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
+                || Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.HARDWARE.contains("goldfish")
+                || Build.HARDWARE.contains("ranchu")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || Build.PRODUCT.contains("sdk_google")
+                || Build.PRODUCT.contains("google_sdk")
+                || Build.PRODUCT.contains("sdk")
+                || Build.PRODUCT.contains("sdk_x86")
+                || Build.PRODUCT.contains("vbox86p")
+                || Build.PRODUCT.contains("emulator")
+                || Build.PRODUCT.contains("simulator");
+    }
 }
 

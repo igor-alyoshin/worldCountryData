@@ -50,22 +50,16 @@ internal class WorldData private constructor(ctx: Context) {
     private suspend fun loadAllData(context: Context) {
         var countryFlag: Int
         val countries = getCountries(context)
-        getCurrencies(context)
         for (country in countries) {
             // do was not allowed as a drawable so was renamed to dominican
-            countryFlag = if (country.alpha2.equals("do", ignoreCase = true)) {
-                R.drawable.dominican
-            } else {
-                val resource = "drawable/" + country.alpha2.toLowerCase()
-                context.resources
-                        .getIdentifier(resource, null, context.packageName)
-            }
+            val resource = "drawable/" + country.alpha3.toLowerCase()
+            countryFlag = context.resources
+                    .getIdentifier(resource, null, context.packageName)
             country.flagResource = countryFlag
-            country.currency = currencyMap[country.alpha2.toLowerCase()]
-            countryFlagMap[country.alpha2] = countryFlag
-            if (country.alpha2.equals("xx", ignoreCase = true)) {
+            countryFlagMap[country.alpha3] = countryFlag
+            if (country.alpha3.equals("xxx", ignoreCase = true)) {
                 universe = country
-                countryFlagMap[universe!!.alpha2] = globe()
+                countryFlagMap[universe!!.alpha3] = globe()
             }
         }
     }
@@ -80,22 +74,8 @@ internal class WorldData private constructor(ctx: Context) {
         return gson.fromJson(values, Array<Country>::class.java)
     }
 
-    /**
-     * Load the currencies from com_blongho_country_data_currencies.json
-     */
-    private fun getCurrencies(context: Context) {
-        val currencyArray = AssetsReader.readFromAssets(context,
-                R.raw.com_blongho_country_data_currencies)
-        val gson = Gson()
-        val currencies = gson.fromJson(currencyArray, Array<Currency>::class.java)
-        for (currency in currencies) {
-            currencyMap[currency.country.toLowerCase()] = currency
-        }
-    }
-
     companion object {
         const val CURRENT_VERSION = "1.5.1-beta"
-        private val currencyMap: MutableMap<String, Currency> = HashMap() // {alpha2, Currency}
         private var instance: WorldData? = null
         private val countryFlagMap: MutableMap<String, Int> = HashMap()
         private var universe: Country? = null
@@ -119,12 +99,6 @@ internal class WorldData private constructor(ctx: Context) {
                 }
             }
             return instance
-        }
-
-        /* package */
-        @JvmStatic
-        fun currencies(): List<Currency> {
-            return ArrayList(currencyMap.values)
         }
 
         /* package */
