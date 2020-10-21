@@ -1,6 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="512dp"
     android:height="512dp"
-    android:viewportWidth="512"
-    android:viewportHeight="512">
+    android:viewportWidth="512.0005"
+    android:viewportHeight="512.0">
+    <group>
+        <path
+            android:fillAlpha="1"
+            android:fillColor="#FFF0F0F0"
+            android:fillType="nonZero"
+            android:pathData="M 256 512 C 397.386719 512 512 397.386719 512 256 C 512 114.613281 397.386719 0 256 0 C 114.617188 0 0 114.613281 0 256 C 0 397.386719 114.617188 512 256 512 Z M 256 512 "
+            android:strokeWidth="1.0" />
+        <path
+            android:fillAlpha="1"
+            android:fillColor="#FF000000"
+            android:fillType="nonZero"
+            android:pathData="M 74.980469 437.019531 C -24.992188 337.046875 -24.992188 174.953125 74.980469 74.980469 C 74.972656 74.992188 222.609375 256 222.609375 256 Z M 74.980469 437.019531 "
+            android:strokeWidth="1.0" />
+        <path
+            android:fillAlpha="1"
+            android:fillColor="#FFFFDA44"
+            android:fillType="nonZero"
+            android:pathData="M 222.609375 256 L 33.953125 128.511719 C 28.105469 138.679688 22.945312 149.292969 18.515625 160.277344 L 114.023438 256 L 18.515625 351.730469 C 22.945312 362.707031 28.097656 373.3125 33.945312 383.472656 Z M 222.609375 256 "
+            android:strokeWidth="1.0" />
+        <path
+            android:fillAlpha="1"
+            android:fillColor="#FF6DA544"
+            android:fillType="nonZero"
+            android:pathData="M 509.832031 222.609375 L 222.601562 222.609375 L 74.976562 74.984375 C 59.070312 90.890625 45.25 108.882812 33.953125 128.515625 L 161.191406 256 L 33.945312 383.46875 C 45.238281 403.105469 59.066406 421.101562 74.976562 437.015625 L 222.601562 289.390625 L 509.832031 289.390625 C 511.257812 278.460938 512 267.316406 512 256 C 512 244.683594 511.257812 233.539062 509.832031 222.609375 Z M 509.832031 222.609375 "
+            android:strokeWidth="1.0" />
+        <path
+            android:fillAlpha="1"
+            android:fillColor="#FF0052B4"
+            android:fillType="nonZero"
+            android:pathData="M 100.136719 459.078125 C 143.308594 492.257812 197.34375 512 256 512 C 374.28125 512 473.804688 431.777344 503.179688 322.78125 L 236.433594 322.78125 Z M 100.136719 459.078125 "
+            android:strokeWidth="1.0" />
+        <path
+            android:fillAlpha="1"
+            android:fillColor="#FFD80027"
+            android:fillType="nonZero"
+            android:pathData="M 503.179688 189.21875 C 473.804688 80.222656 374.28125 0 256 0 C 197.34375 0 143.308594 19.742188 100.136719 52.921875 L 236.433594 189.21875 Z M 503.179688 189.21875 "
+            android:strokeWidth="1.0" />
+    </group>
 </vector>
