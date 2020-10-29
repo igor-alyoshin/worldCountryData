@@ -52,9 +52,12 @@ internal class WorldData private constructor(ctx: Context) {
         val countries = getCountries(context)
         for (country in countries) {
             // do was not allowed as a drawable so was renamed to dominican
-            val resource = "drawable/" + country.alpha3.toLowerCase()
-            countryFlag = context.resources
-                    .getIdentifier(resource, null, context.packageName)
+            countryFlag =
+                    context.resources.getIdentifier(
+                            "lang_${country.alpha3.toLowerCase()}",
+                            "drawable",
+                            context.packageName
+                    )
             country.flagResource = countryFlag
             countryFlagMap[country.alpha3] = countryFlag
             if (country.alpha3.equals("xxx", ignoreCase = true)) {
@@ -114,7 +117,7 @@ internal class WorldData private constructor(ctx: Context) {
          */
         @JvmStatic
         fun globe(): Int {
-            return R.drawable.globe
+            return R.drawable.lang_globe
         }
 
         /**
