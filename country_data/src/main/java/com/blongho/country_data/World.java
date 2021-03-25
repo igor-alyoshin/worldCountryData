@@ -83,7 +83,7 @@ public final class World {
             throw new CountryDataException(
                     "You have to call World.init(getApplicationContext()) before this method.");
         }
-        if (countryIdentifier.isEmpty()) {
+        if (countryIdentifier == null || countryIdentifier.isEmpty()) {
             return getWorldFlag();
         }
         return WorldData.flagFromCountry(countryIdentifier);
