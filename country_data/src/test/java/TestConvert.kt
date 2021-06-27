@@ -14,6 +14,9 @@ class TestConvert {
         val icons = file.listFiles() ?: emptyArray()
         icons.forEach { iconFile ->
             iconFile.renameTo(File(iconFile.parent, iconFile.name.replace("ic_", "").replace("_svg", "")))
+            if (!iconFile.name.startsWith("lang_")) {
+                iconFile.renameTo(File(iconFile.parent, iconFile.name.replace(iconFile.name, "lang_${iconFile.name}")))
+            }
         }
         val languages = arrayListOf<Lang>()
         var id = 0
