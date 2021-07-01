@@ -22,7 +22,7 @@ class TestConvert {
         var id = 0
         icons.forEach { iconFile ->
             val name = iconFile.nameWithoutExtension
-            languages.add(Lang(name, id.toString()))
+            languages.add(Lang(name.replace("lang_", ""), id.toString()))
             id++
         }
         languages.add(Lang("xxx", "999"))
