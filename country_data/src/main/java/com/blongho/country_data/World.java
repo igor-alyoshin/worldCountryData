@@ -89,14 +89,6 @@ public final class World {
         return WorldData.flagFromCountry(countryIdentifier);
     }
 
-    public static int[] getFlagsOf(final String... countryIdentifiers) {
-        if (instance == null) {
-            throw new CountryDataException(
-                    "You have to call World.init(getApplicationContext()) before this method.");
-        }
-        return WorldData.flagsFromCountries(countryIdentifiers);
-    }
-
     /**
      * Get the image of the globe directly rather than querying World.getFlagOf("globe")
      *
