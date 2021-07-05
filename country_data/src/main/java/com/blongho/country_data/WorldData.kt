@@ -134,17 +134,9 @@ internal class WorldData private constructor(ctx: Context) {
                     || countryIdentifier.equals("globe", ignoreCase = true)) {
                 return globe()
             }
-            val country = countryFlagMap[countryIdentifier]
+            val identifier = countryIdentifier.replace("-", "_")
+            val country = countryFlagMap[identifier]
             return country ?: globe()
-        }
-
-        @JvmStatic
-        fun flagsFromCountries(vararg countryIdentifiers: String): IntArray {
-            val result = IntArray(countryIdentifiers.size)
-            for (i in 0 until countryIdentifiers.size) {
-                result[i] = flagFromCountry(countryIdentifiers[i])
-            }
-            return result
         }
     }
 
